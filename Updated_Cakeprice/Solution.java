@@ -134,4 +134,3 @@ class Cake
         this.eggless = eggless;
     }
     
-}
