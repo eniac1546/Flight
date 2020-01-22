@@ -1,0 +1,643 @@
+//Toast master
+
+package com;
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class ToastMaster {
+    public static void main(String args[] ) throws Exception {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    ToastMasters[] t = new ToastMasters[5];        
+        Scanner sc = new Scanner(System.in);
+        
+        for(int i = 0;i<t.length;i++)
+        {
+            int id = sc.nextInt();sc.nextLine();
+            String location = sc.nextLine();
+            String type = sc.nextLine();
+            int NoOfEvents = sc.nextInt();
+            int NoOfYears =  sc.nextInt();
+            t[i] = new ToastMasters(id,location,type,NoOfEvents,NoOfYears);
+        }
+        sc.nextLine();
+        String loc = sc.nextLine();
+        System.out.println("Total Count of "+loc+" : "+specificLocationCount(t,loc));
+        ToastMasters t1[] = updateType(t);  
+        try{
+        for(int i=0;i<t1.length;i++)
+            System.out.println(t1[i].getId()+"  "+t1[i].getLocation()+"  "+t1[i].getType());}
+        catch(NullPointerException ex){
+        	
+        }
+    }
+    
+    public static int specificLocationCount(ToastMasters[] t,String loc)
+    {
+        //implement the method
+    	int count=0;
+    	for(int i=0;i<t.length;i++){
+    		if(t[i].getNoOfEvents()>10&&t[i].getLocation().equalsIgnoreCase(loc))
+    			count++;
+    	}
+    	return count;
+    }
+    
+    public static ToastMasters[] updateType(ToastMasters[] t)
+    {
+        //implement the method
+    	int j=0;
+    	ToastMasters[] a= new ToastMasters[3];
+    	
+    	for (int i=0;i<t.length;i++){
+    		if(t[i].getType().equalsIgnoreCase("Member")&& t[i].getNoOfEvents()>8 && t[i].getNoOfYears()>3)
+    		{
+    			t[i].setType("Host");
+    			a[j++]=t[i];
+    }
+}
+    return a;
+}
+}
+class ToastMasters
+{
+    //implement the class
+	private int id;
+	private String Location;
+	private String type;
+	private int NoOfEvents;
+	private int NoOfYears;
+	public ToastMasters(int id, String location, String type, int noOfEvents, int noOfYears) {
+		super();
+		this.id = id;
+		Location = location;
+		this.type = type;
+		NoOfEvents = noOfEvents;
+		NoOfYears = noOfYears;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getLocation() {
+		return Location;
+	}
+	public void setLocation(String location) {
+		Location = location;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public int getNoOfEvents() {
+		return NoOfEvents;
+	}
+	public void setNoOfEvents(int noOfEvents) {
+		NoOfEvents = noOfEvents;
+	}
+	public int getNoOfYears() {
+		return NoOfYears;
+	}
+	public void setNoOfYears(int noOfYears) {
+		NoOfYears = noOfYears;
+	}
+}
+		
+		
+		
+		
+		
+		
+		///////////////////primenumber
+		
+		package com;
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class ProgramPrime {
+    public static void main(String args[] ) throws Exception {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+           Scanner sc = new Scanner(System.in);
+          int flag = sc.nextInt();
+        if(flag==1){//Average test case
+            int[] values = new int[] {11,0,2,3,4,5,6,7,8,9,10,21,22};
+        
+        double result = ProgramPrime.addPrimeNumbers(values);
+        System.out.println(result);
+        
+        values = new int[]{22,33,44,2,1,0};
+        result = ProgramPrime.addPrimeNumbers(values);
+        System.out.println(result);
+        }else{//High Test case
+            int[] values = new int[] {0,1,2,3,4,5,6,7,8,9,10,21,22};
+        
+        double result = ProgramPrime.addPrimeNumbers(values);
+        System.out.println(result);
+        
+        values = new int[]{-11,22,33,44,2,1,0};
+        result = ProgramPrime.addPrimeNumbers(values);
+        System.out.println(result);    
+        
+        boolean f = ProgramPrime.isPrime(22);
+        System.out.println(f);
+         f = ProgramPrime.isPrime(2);
+         System.out.println(f);
+         f = ProgramPrime.isPrime(2);
+         System.out.println(f);
+        }
+    }
+    
+    //Implement static methods here
+    
+    
+    public static double addPrimeNumbers(int []a)
+    {
+        double sum=0;
+        for(int i=0;i<a.length;i++)
+        {
+            if(isPrime(a[i]) == true)
+            sum=sum+a[i];
+        }
+        return sum;
+    }
+
+    public static boolean isPrime(int n)
+    {
+    boolean result=false;
+    int flag=0;
+    for(int i=1;i<=n;i++)
+    {
+        if((n%i)==0)
+        {
+            flag++;
+        }
+    }
+    if(flag==2)
+    result=true;
+    return result;
+    }
+}
+
+
+package com; 
+
+public class StudentDemo 
+{ 
+ 
+ public static void main(String[] args) 
+ {      
+	 Student one = new Student(1, "ravi", 45);   
+	 Student two = new Student(2, "amit", 25);   
+	 Student three = new Student(3, "pooja", 55);   
+	 //trainees may use scanner object to read above values. 
+	 //However, use separate scanner for String and numbers
+ 
+	 System.out.println("Student with highest marks is " + compareStudents(one, two, three)); 
+ }    
+ public static String compareStudents(Student one, Student two, Student three)  
+ {   
+	 Student st = one;      
+	 if(two.getMarks() >st.getMarks())    st = two;      
+	 if(three.getMarks() > st.getMarks())    st = three;      
+	 return st.getName();  } 
+ 
+} 
+class Student 
+{  
+	private int rollNo;  
+	private String name;  
+	private double marks;    
+	
+	public Student(int rollNo, String name, double marks) 
+	{   
+		this.rollNo = rollNo;   this.name = name;   this.marks = marks;  
+		} 
+ 
+ public double getMarks() 
+ {   
+	 return marks;  
+	 } 
+ 
+ public void setMarks(double marks) 
+ {   
+	 this.marks = marks;  
+	 } 
+ 
+ public int getRollNo() 
+ {   
+	 return rollNo;  
+	 } 
+ 
+ public String getName() 
+ {   
+	 return name;  
+	 }      
+ }
+ 
+ 
+ 
+ //inventory
+ 
+ 
+ package inventory;
+
+import java.util.*;
+
+public class Inventory {
+	public static void main(String[] args) {
+		         Product[] prods = new Product[5];
+		           @SuppressWarnings("resource")
+				Scanner sc = new Scanner(System.in);
+		            
+		            for(int i = 0;i<prods.length;i++)
+		            {
+		                int prodid = sc.nextInt();
+		                sc.nextLine();
+		                String prodname = sc.nextLine();
+		                double prodcost = sc.nextDouble();
+		                sc.nextLine();
+		                String prodtype = sc.nextLine();
+		                int prodquantity = sc.nextInt();
+		                //sc.nextLine();
+		                prods[i]= new Product(prodid,prodname,prodcost,prodtype,prodquantity);
+		            }
+		            int newquantity = sc.nextInt();
+		             sc.nextLine();
+		            String prodtype =  sc.nextLine();
+		          
+		          int count =   updateProductQuantity(prods,newquantity);
+		           System.out.println(count);
+		       Product[] prods1 =   getAllProductsProducttypeCost(prods, prodtype);
+		        if(prods1.length>0){
+		        for(Product prod : prods1){
+		            if(prod!=null) {
+		     System.out.println(prod.getProductname()+" "+prod.getProductcost()+" "+prod.getProductquantity()+" "+prod.getProducttype());
+		               }
+		        }
+		        }else{
+		            System.out.println("Nothing Found");
+		        }
+		    }
+		    
+
+	private static int updateProductQuantity(Product[] prods, int newquantity) {
+		
+		return 0;
+	}
+
+	private static Product[] getAllProductsProducttypeCost(Product[] prods, String prodtype) {
+		
+		return null;
+	}
+		}
+		class Product{
+		    int productid,productquantity;
+		    String productname, producttype;
+		    double productcost;
+			public Product(int prodid, String prodname, double prodcost, String prodtype, int prodquantity) {
+			}
+			public String getProductname() {
+				
+				return null;
+			}
+			public String getProducttype() {
+				
+				return null;
+			}
+			public String getProductquantity() {
+				
+				return null;
+			}
+			public String getProductcost() {
+				
+				return null;
+			}
+
+		    
+
+
+
+	}
+
+
+
+//books
+
+package com;
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Books {
+    
+	public static void main(String args[] ) throws Exception 
+    {
+    	Book[] books = new Book[4];
+        double min = 0;
+        double max = 0;
+        Scanner sc = new Scanner(System.in);
+        for(int i = 0;i<books.length;i++)
+        {
+            int id = sc.nextInt();
+            String title = sc.nextLine();
+            String author = sc.nextLine();
+            sc.nextLine();
+            double price = sc.nextDouble();            
+            books[i]= new Book(id,title,author,price);
+        }
+        min = sc.nextDouble();
+        max = sc.nextDouble();
+        Book[] newBooks = bookWithPriceRange(min,max,books);
+        try{
+        for(Book b:newBooks)
+             System.out.println(b.getId());
+    }
+	catch(NullPointerException ex)
+	{
+		
+	}
+        
+    }
+    
+    //implement business methods here
+    public static Book[] bookWithPriceRange(double min,double max,Book[] books)
+    {
+    	Book[] b= new Book[books.length];
+    	Book[] a= new Book[1];
+    	int j=0;
+    	for(int i=0;i<books.length;i++)
+    	{
+    		if(books[i].getPrice()>min && books[i].getPrice()<max)
+    		{
+    			b[j]=books[i];
+    		j++;
+    		}
+    	}
+    	for(int k=0;k<b.length;k++){
+    	for(int l=k;l<b.length;l++){
+    	try
+    		{
+    			if(b[k].getId()>b[1].getId())
+    			{
+    				a[0]=b[k];
+    				b[k]=b[l];
+    				b[l]=a[0];
+    			}
+    }
+    catch(NullPointerException ex)
+    {
+    	
+    }
+    	}
+    	}
+return b;
+}
+}
+
+class Book
+{
+    //implement class here
+	private int id;
+	private String title;
+	private String author;
+	private double price;
+	public Book(int id, String title, String author, double price) 
+	{
+		super();
+		this.id = id;
+		this.title = title;
+		this.author = author;
+		this.price = price;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+}
+
+package com;
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Product[] products = new Product[5];
+    
+        Scanner sc = new Scanner(System.in);
+        
+        for(int i = 0; i<5; i++)
+        {
+            int productId = sc.nextInt(); sc.nextLine();
+            String productName = sc.nextLine();
+            int qty = sc.nextInt(); 
+            int price = sc.nextInt(); 
+
+            products[i] = new Product(productId, productName, qty, price);
+        }    
+        
+        
+        int totalCartPrice = calculateTotalCartPrice(products);
+        System.out.println("Total Cart Price : " + totalCartPrice);
+
+        System.out.println("\n");
+        
+        Product[] productsWithDescendingPrice = arrangeProductsByPriceDescending(products);
+        System.out.println("---- PRODUCTS WITH DESCENDING PRICE ----");
+        for (Product p : productsWithDescendingPrice) {
+            System.out.println(p.getProductName() + " \t\t: " + p.getPrice());
+        }
+    }
+    
+    //implement business methods here
+    public static int calculateTotalCartPrice(Product[] products)
+    {
+    	int sum=0;
+    	int price;
+    	for(int i=0;i<products.length;i++)
+    	{
+    		price=products[i].getQty()*products[i].getPrice();
+    		sum=sum+price;
+    	}
+    	return sum;
+    }
+    
+    public static Product[] arrangeProductsByPriceDescending(Product[] products)
+    {
+    	Product[] p=new Product[1];
+    	for(int i=0;i<products.length;i++)
+    	{
+    		for(int j=i;j<products.length;j++)
+    		{
+    			if(products[i].getPrice()<products[j].getPrice())
+    				{
+    				p[0]=products[j];
+    				products[i]=products[j];
+    				products[j]=p[0];    				
+    				}
+    		}
+    	}
+    	return products;
+    }
+
+}
+
+class Product
+{
+    private int productId;
+    private String productName;
+    private int qty;
+    private int price;
+	public Product(int productId, String productName, int qty, int price) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.qty = qty;
+		this.price = price;
+	}
+	public int getProductId() {
+		return productId;
+	}
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	public int getQty() {
+		return qty;
+	}
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+    
+}
+ 
+ 
+ // prime   
+
+package com;
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class ProgramPrime {
+    public static void main(String args[] ) throws Exception {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+           Scanner sc = new Scanner(System.in);
+          int flag = sc.nextInt();
+        if(flag==1){//Average test case
+            int[] values = new int[] {11,0,2,3,4,5,6,7,8,9,10,21,22};
+        
+        double result = ProgramPrime.addPrimeNumbers(values);
+        System.out.println(result);
+        
+        values = new int[]{22,33,44,2,1,0};
+        result = ProgramPrime.addPrimeNumbers(values);
+        System.out.println(result);
+        }else{//High Test case
+            int[] values = new int[] {0,1,2,3,4,5,6,7,8,9,10,21,22};
+        
+        double result = ProgramPrime.addPrimeNumbers(values);
+        System.out.println(result);
+        
+        values = new int[]{-11,22,33,44,2,1,0};
+        result = ProgramPrime.addPrimeNumbers(values);
+        System.out.println(result);    
+        
+        boolean f = ProgramPrime.isPrime(22);
+        System.out.println(f);
+         f = ProgramPrime.isPrime(2);
+         System.out.println(f);
+         f = ProgramPrime.isPrime(2);
+         System.out.println(f);
+        }
+    }
+    
+    //Implement static methods here
+    
+    
+    public static double addPrimeNumbers(int []a)
+    {
+        double sum=0;
+        for(int i=0;i<a.length;i++)
+        {
+            if(isPrime(a[i]) == true)
+            sum=sum+a[i];
+        }
+        return sum;
+    }
+
+    public static boolean isPrime(int n)
+    {
+    boolean result=false;
+    int flag=0;
+    for(int i=1;i<=n;i++)
+    {
+        if((n%i)==0)
+        {
+            flag++;
+        }
+    }
+    if(flag==2)
+    result=true;
+    return result;
+    }
+}
+
+
+
+
+
+
