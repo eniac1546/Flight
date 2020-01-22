@@ -1,0 +1,303 @@
+//////////////////Book shelf program
+
+
+
+public class Solution {
+public static void main(String[] args) {
+// TODO Auto-generated method stub
+Book[] books = new Book[6];
+
+Scanner sc = new Scanner(System.in);
+
+for(int i = 0; i<6; i++)
+{            
+    String bookName = sc.nextLine();
+    String author = sc.nextLine();
+    String subject = sc.nextLine();
+    int price = sc.nextInt(); sc.nextLine();
+    int qty = sc.nextInt(); sc.nextLine();            
+
+    books[i] = new Book(bookName, author, subject, price, qty);
+}
+
+char ch = sc.next(".").charAt(0); sc.nextLine();
+String subject = sc.nextLine();
+
+
+Book[] bookList = findBooksWithAuthorStartingWith(books, ch);
+System.out.println("---- BOOKS WITH AUTHOR NAME STARTING WITH " + ch + " ----");
+for (Book b : bookList) {
+    System.out.println(b.getBookName() + "\t : " + b.getAuthor());
+
+}
+
+System.out.println("\n");
+
+int count = getTotalNoOfBooksOnSubject(books, subject);
+System.out.println("Total No.(Qty) of Books on " + subject + " = " + count);
+}
+public static Book[] findBooksWithAuthorStartingWith(Book[] books,char ch)
+{
+Book[] b=new Book[books.length];
+int k=0;
+for(int i=0;i<books.length;i++)
+{
+if((books[i].getAuthor().charAt(0))==ch)
+{
+
+    b[k]=books[i];
+    k++;
+}
+}
+b=Arrays.copyOf(b, k);
+return b;
+}
+public static int getTotalNoOfBooksOnSubject(Book[] books,String subject)
+{
+int sum=0;
+for(int i=0;i<books.length;i++)
+{
+if(books[i].getSubject().equals(subject))
+{
+sum+=books[i].getQty();
+}
+}
+return sum;
+}
+
+//implement business methods here
+}
+
+class Book
+{
+String bookName;
+String author;
+String subject;
+int price;
+int qty;
+public Book(String bookName,String author,String subject,int price,int qty)
+{
+this.bookName=bookName;
+this.author=author;
+this.subject=subject;
+this.price=price;
+this.qty=qty;
+}
+public String getBookName()
+{
+return bookName;
+}
+public void setBookName(String bookName )
+{
+this.bookName=bookName;
+}
+public String getAuthor()
+{
+return author;
+}
+public void setAuthor(String author )
+{
+this.author=author;
+}
+public String getSubject()
+{
+return subject;
+}
+public void setSubject(String subject )
+{
+this.subject=subject;
+}
+public int getPrice()
+{
+return price;
+}
+public void setPrice(int price )
+{
+this.price=price;
+}
+public int getQty()
+{
+return qty;
+}
+public void setQty(int qty )
+{
+this.qty=qty;
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Employee Officer
+
+
+
+public class Solution {
+public static void main(String[] args) {
+int id,cub;
+String dep,name;
+double sal;
+Scanner sc= new Scanner(System.in);
+Office o[]=new Office[5];
+for(int i=0;i<5;i++)
+{
+id=sc.nextInt();
+cub=sc.nextInt();
+dep=sc.nextLine();
+sc.next();
+o[i]=new Office(id, cub, dep);
+}
+
+Employee e[]=new Employee[5];
+for(int i=0;i<5;i++)
+{
+    id=sc.nextInt();
+    sc.nextLine();
+    name=sc.nextLine();
+    sal=sc.nextDouble();
+    e[i] = new Employee(id, name, sal);
+}
+int c=sc.nextInt();
+Employee[] esort = sortEmployeeAsceName(e);
+for(int i=0;i<esort.length;i++)
+{
+    System.out.println(esort[i].getEmployeeId()+" "+esort[i].getName());
+}
+Employee emp = employeeDetailsBasedOnCubicalNo(o,e,c);
+if(emp==null)
+    System.out.println("No one sit on this cubical.");
+else
+System.out.println(emp.getEmployeeId()+" "+emp.getName()+" "+emp.getSalary());
+}
+
+public static Employee[] sortEmployeeAsceName(Employee e[])
+{
+
+Employee temp;
+for(int i=0;i<e.length;i++)
+{
+for(int j=i+1;j<e.length;j++)
+{
+if(((e[i].name).toLowerCase()).compareTo((e[j].name).toLowerCase())>0)
+{
+temp=e[i];
+e[i]=e[j];
+e[j]=temp;
+}
+}
+}
+return e;
+//implement method
+}
+
+public static Employee employeeDetailsBasedOnCubicalNo(Office o[], Employee[] e, int c)
+{
+//implement method
+Employee result=new Employee();
+int eid=0;
+int count=0;
+for(int i=0;i<o.length;i++)
+{
+if(o[i].getCubicalNo()c)
+{
+eid=o[i].getEmployeeId();
+count++;
+}
+else{continue;}
+}
+if(count0)
+{
+return null;
+}
+else
+{
+for(int j=0;j<e.length;j++)
+{
+if(e[j].getEmployeeId()==eid)
+{
+result=e[j];
+}
+}
+
+}
+return result;
+}
+}
+
+class Employee {
+int employeeId;
+String name;
+double salary;
+public Employee() {
+super();
+// TODO Auto-generated constructor stub
+}
+public Employee(int employeeId, String name, double salary) {
+super();
+this.employeeId = employeeId;
+this.name = name;
+this.salary = salary;
+}
+public int getEmployeeId() {
+return employeeId;
+}
+public void setEmployeeId(int employeeId) {
+this.employeeId = employeeId;
+}
+public String getName() {
+return name;
+}
+public void setName(String name) {
+this.name = name;
+}
+public double getSalary() {
+return salary;
+}
+public void setSalary(double salary) {
+this.salary = salary;
+}
+
+}
+
+class Office {
+int employeeId;
+int cubicalNo;
+String department;
+public Office(int employeeId, int cubicalNo, String department) {
+super();
+this.employeeId = employeeId;
+this.cubicalNo = cubicalNo;
+this.department = department;
+}
+public int getEmployeeId() {
+return employeeId;
+}
+public void setEmployeeId(int employeeId) {
+this.employeeId = employeeId;
+}
+public int getCubicalNo() {
+return cubicalNo;
+}
+public void setCubicalNo(int cubicalNo) {
+this.cubicalNo = cubicalNo;
+}
+public String getDepartment() {
+return department;
+}
+public void setDepartment(String department) {
+this.department = department;
+}
+
+}
